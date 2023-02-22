@@ -2,6 +2,8 @@
 #define PCAPFILE_H
 
 #include <stdio.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 typedef unsigned int uint;
 typedef unsigned short ushort;
@@ -31,7 +33,7 @@ struct _PACKETHEADER
 #define PF_MAGIC 0xA1B2C3D4
 
 #define LT_ETHER	0x01
-void ParseEther(FILE *fp);
+void ParseEthers(FILE *fp);
 int ParsePCapFile(FILE *fp, PFHeader *pfh);
 
 #endif

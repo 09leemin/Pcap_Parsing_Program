@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 
 	switch(pfh.linktype)
 	{
-	case LT_ETHER : ParseEther(fp); break;
+	case LT_ETHER : ParseEthers(fp); break;
 	default : printf("Not Support\n"); break;
 		break;
 	}

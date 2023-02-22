@@ -1,20 +1,21 @@
 #include "pcapfile.h"
+#include "EHEther.h"
 
 char buffer[0x100000];
 
 void ViewPCapFile(FILE *fp, PFHeader *pfh);
 void ViewPacketHeaderInfo(PackHeader *ph, int pno);
 
-void ParseEther(FILE *fp)
+void ParseEthers(FILE *fp)
 {
 	PackHeader ph = {0};
-	int pno;
+	int pno = 0;
 	while(fread(&ph, sizeof(PackHeader), 1, fp) == 1)
 	{
 		pno++;
 		ViewPacketHeaderInfo(&ph, pno);
 		fread(buffer, sizeof(uchar), ph.caplen, fp);
-
+		ParseEther(buffer, ph.caplen);
 	}
 }
 
@@ -40,6 +41,6 @@ void ViewPCapFile(FILE *fp, PFHeader *pfh)
 
 void ViewPacketHeaderInfo(PackHeader *ph, int pno)
 {
-	printf("!!! <%4d th> 프레임 !!!\n", pno);
+	printf("\n!!! <%4d th> 프레임 !!!\n", pno);
 	printf("패킷:%6d bytes 캡쳐:%6d\n", ph->packlen, ph->caplen);
 }
