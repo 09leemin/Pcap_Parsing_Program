@@ -1,4 +1,5 @@
 #include "EHEther.h"
+#include "IPv4.h"
 
 void ViewEther(EtherHeader *eh);
 void ParseEther(uchar *buffer, uint len)
@@ -10,7 +11,7 @@ void ParseEther(uchar *buffer, uint len)
     ViewEther(eh);
     switch(ntohs(eh->l3type))
     {
-        case L3_IPv4 : printf("IPv4: to be defined\n"); break;
+        case L3_IPv4 : ParseIPv4(next, len); break;
         case L3_ARP : printf("ARP: to be defined\n"); break;
         default : printf("Not support\n");
             break;
