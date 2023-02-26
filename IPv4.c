@@ -1,4 +1,5 @@
 #include "IPv4.h"
+#include "TCP.h"
 
 void PrintIPv4(uint addr)
 {
@@ -43,7 +44,7 @@ void ParseIPv4(uchar *base, uint len)
     switch(iph->protocol)
     {
         case PRO_ICMPv4 : printf("to be defined\n"); break;
-        case PRO_TCP : printf("to be defined\n"); break;
+        case PRO_TCP : ParseTCP(next, len); break;
         default: printf("\t Not supported\n");
             break;
     }
